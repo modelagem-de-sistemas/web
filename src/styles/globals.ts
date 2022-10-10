@@ -31,6 +31,7 @@ export default createGlobalStyle`
     --border-radius: 10px;
     --navbar-size: 4.2rem;
 
+    --color-background: #ffb200;
     --color-primary: #ffb200;
     --color-primary-dark: #df9b00;
     --color-secondary: #0096c7;

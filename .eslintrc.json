@@ -30,6 +30,7 @@
     "react/prop-types": "off",
     "semi": "off",
     "camelcase": "off",
-    "@typescript-eslint/ban-ts-ignore": "off"
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "noImplicitAny": false
   }
 }

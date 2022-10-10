@@ -64,11 +64,6 @@ export default class MyDocument extends Document {
               `
             }}
           />
-
-          <link
-            rel="icon"
-            href="https://misteriosdorosario.s3.amazonaws.com/general/mdr.ico"
-          />
         </Head>
         <body>
           <Main />
