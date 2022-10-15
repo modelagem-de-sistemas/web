@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const withImages = require('next-images');
+
+module.exports = {
   reactStrictMode: true,
-  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true
+  },
+  images: {
+    domains: ['i.ytimg.com']
   }
 };
-
-module.exports = nextConfig;

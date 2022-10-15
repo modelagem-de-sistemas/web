@@ -1,13 +1,10 @@
-import React from 'react';
-import { NextPage } from 'next';
-import Metatags from '@/components/Templates/Seo/Metatags';
+import type { NextPage } from "next";
+import React from "react";
+
+import TemplateHome from "../components/Templates/LandingPage";
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <Metatags title="Home" url="/" />
-    </>
-  );
+  return <TemplateHome></TemplateHome>;
 };
 
 export default Home;

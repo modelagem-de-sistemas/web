@@ -1,36 +1,66 @@
 {
+  "root": true,
   "env": {
     "browser": true,
-    "es2020": true,
-    "node": true,
-    "jest": true
+    "es2021": true
   },
   "extends": [
     "plugin:react/recommended",
-    "standard",
+    "prettier",
+    "plugin:react/jsx-runtime",
+    "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "prettier/standard",
-    "prettier/react",
     "next/core-web-vitals"
   ],
-  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
+  },
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true
+      "experimentalObjectRestSpread": true,
+      "impliedStrict": true
     },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "ecmaVersion": 12
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": ["prettier", "react", "react-hooks"],
   "rules": {
-    "prettier/prettier": "error",
-    "space-before-function-paren": "off",
-    "react/prop-types": "off",
-    "semi": "off",
-    "camelcase": "off",
-    "@typescript-eslint/ban-ts-ignore": "off",
-    "noImplicitAny": false
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/jsx-filename-extension": 0,
+    "no-param-reassign": 0,
+    "react/require-default-props": 0,
+    "react/no-array-index-key": 0,
+    "react-hooks/exhaustive-deps": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/forbid-prop-types": 0,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "import/order": 2,
+    "no-console": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "prefer-destructuring": 0,
+    "no-shadow": 0,
+    "no-unused-vars": [
+      2,
+      {
+        "ignoreRestSiblings": false
+      }
+    ],
+    "prettier/prettier": [
+      2,
+      {
+        "bracketSpacing": true,
+        "printWidth": 140,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "tabWidth": 4,
+        "useTabs": false,
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
