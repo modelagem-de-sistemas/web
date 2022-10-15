@@ -10,9 +10,7 @@ const AdminNavbar: React.FC = () => {
 
         <Logo>{AppConfig.logo}</Logo>
 
-        <div className="toggle">
-          <Toggle />
-        </div>
+        <Toggle />
       </Content>
     </Container>
   );
