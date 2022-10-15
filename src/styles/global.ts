@@ -21,6 +21,10 @@ export default memo(createGlobalStyle`
     scroll-behavior: smooth;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   :root {
     font-size: 16px !important;
     font-display: swap;
@@ -39,7 +43,36 @@ export default memo(createGlobalStyle`
     --container-color: #FFF;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+
+    --first-color: #6923D0;
+    --first-color: purple;
+    --first-color-light: #F4F0FA;
+    --title-color: #19181B;
+    --text-color: #58555E;
+    --text-color-light: #A5A1AA;
+    --body-color: #F9F6FD;
+    --container-color: #FFFFFF;
+
+    --body-font: 'Poppins', sans-serif;
+
+--normal-font-size: .938rem;
+--small-font-size: .75rem;
+--smaller-font-size: .75rem;
+
+@media screen and (min-width: 1024px){
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+}
+
+/*========== Font weight ==========*/
+--font-medium: 500;
+--font-semi-bold: 600;
+
     --color-text: #222;
+
+    --header-height: 3.5rem;    
+    --z-fixed: 100;
 
     --border-radius: 4px;
     --medium-border-radius: 10px;
