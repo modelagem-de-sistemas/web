@@ -1,16 +1,28 @@
 import SidebarListItem from '@/components/Molecules/ListItems/SidebarListItem';
 import { AppConfig } from '@/config';
-import React from 'react';
+import React, { useRef } from 'react';
 import { FiBook, FiSettings, FiFolder, FiHome, FiLogOut, FiMail, FiUser, FiUsers } from 'react-icons/fi';
 import { CgWebsite, CgBriefcase } from 'react-icons/cg';
 import { RiDashboardFill } from 'react-icons/ri';
 
 import { Container, Content, Heading, IconContainer, Items, List, Logo } from './styles';
 import Link from 'next/link';
+import useOnClickOutside from '@/hooks/useOnClickOutside';
 
-const AdminSidebar: React.FC = () => {
+interface Props {
+  handleSidebar: (open: boolean) => void;
+  sidebarOpen: boolean;
+}
+
+const AdminSidebar: React.FC<Props> = (props) => {
+  const ref = useRef<any>(null);
+
+  useOnClickOutside(ref, (): void => {
+    props.handleSidebar(false);
+  });
+
   return (
-    <Container>
+    <Container ref={ref} active={props.sidebarOpen}>
       <Content>
         <main>
           <Link href="/admin">
@@ -27,10 +39,10 @@ const AdminSidebar: React.FC = () => {
             <Items>
               <Heading>Profile</Heading>
 
-              <SidebarListItem label="Home" icon={<FiHome />} active uri="/" />
+              <SidebarListItem label="Home" icon={<FiHome />} active href="/" />
 
               <div className="dropdown">
-                <SidebarListItem label="Profile" icon={<FiUser />} uri="/" />
+                <SidebarListItem label="Profile" icon={<FiUser />} href="/" />
 
                 <div className="dropdown-collapse">
                   <div className="dropdown-content">
@@ -44,25 +56,25 @@ const AdminSidebar: React.FC = () => {
                 </div>
               </div>
 
-              <SidebarListItem label="Messages" icon={<FiMail />} uri="/" />
+              <SidebarListItem label="Messages" icon={<FiMail />} href="/" />
 
-              <SidebarListItem label="Contacts" icon={<FiUsers />} uri="/" />
+              <SidebarListItem label="Contacts" icon={<FiUsers />} href="/" />
             </Items>
 
             <Items>
               <Heading>Explore</Heading>
 
-              <SidebarListItem label="Homepage" icon={<CgWebsite />} uri="/" />
-              <SidebarListItem label="Educations" icon={<FiBook />} uri="/" />
-              <SidebarListItem label="Skills" icon={<FiSettings />} uri="/" />
-              <SidebarListItem label="Jobs" icon={<CgBriefcase />} uri="/" />
-              <SidebarListItem label="Projects" icon={<FiFolder />} uri="/" />
+              <SidebarListItem label="Homepage" icon={<CgWebsite />} href="/" />
+              <SidebarListItem label="Educations" icon={<FiBook />} href="/" />
+              <SidebarListItem label="Skills" icon={<FiSettings />} href="/" />
+              <SidebarListItem label="Jobs" icon={<CgBriefcase />} href="/" />
+              <SidebarListItem label="Projects" icon={<FiFolder />} href="/" />
             </Items>
           </List>
         </main>
 
         <footer>
-          <SidebarListItem label="Log Out" icon={<FiLogOut />} uri="/" />
+          <SidebarListItem label="Log Out" icon={<FiLogOut />} href="/" />
         </footer>
       </Content>
     </Container>

@@ -7,14 +7,14 @@ interface Props {
   label: string;
   icon: React.ReactNode;
   active?: boolean;
-  uri: string;
+  href: string;
 }
 
 const SidebarListItem: React.FC<Props> = (props) => {
   return (
     <>
-      <Link href={props.uri}>
-        <Container href={props.uri} className="link active" active={props.active}>
+      <Link href={props.href}>
+        <Container href={props.href} className="link active" active={props.active}>
           <IconContainer>{props.icon}</IconContainer>
           <span>{props.label}</span>
         </Container>

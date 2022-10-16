@@ -32,6 +32,7 @@ export const Logo = styled.a`
   color: var(--title-color);
   font-weight: var(--font-medium);
   display: none;
+  -webkit-tap-highlight-color: transparent;
 
   @media screen and (min-width: 768px) {
     display: block;

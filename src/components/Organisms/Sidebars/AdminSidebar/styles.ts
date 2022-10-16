@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.nav`
+interface Props {
+  active?: boolean;
+}
+
+export const Container = styled.nav<Props>`
   position: fixed;
   top: 0;
   left: -100%;
@@ -10,6 +14,17 @@ export const Container = styled.nav`
   box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
   z-index: var(--z-fixed);
   transition: 0.4s;
+
+  ${({ active }) =>
+    active &&
+    css`
+      left: 0;
+
+      span,
+      h3 {
+        opacity: 1;
+      }
+    `}
 
   .dropdown {
     overflow: hidden;
@@ -133,8 +148,7 @@ export const Logo = styled.a`
   margin-bottom: 2.5rem;
   cursor: pointer;
 
-  > span {
-    opacity: 0;
+  span {
     transition: 0.3s;
   }
 

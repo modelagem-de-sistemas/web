@@ -25,6 +25,10 @@ export default memo(createGlobalStyle`
     text-decoration: none;
   }
 
+  button, a, div, i{
+    -webkit-tap-highlight-color: transparent;
+  }
+
   :root {
     font-size: 16px !important;
     font-display: swap;

@@ -2,7 +2,11 @@ import { AppConfig } from '@/config';
 import React from 'react';
 import { AvatarContainer, Container, Content, Logo, Toggle } from './styles';
 
-const AdminNavbar: React.FC = () => {
+interface Props {
+  handleSidebar: () => void;
+}
+
+const AdminNavbar: React.FC<Props> = ({ handleSidebar }) => {
   return (
     <Container>
       <Content>
@@ -10,7 +14,7 @@ const AdminNavbar: React.FC = () => {
 
         <Logo>{AppConfig.logo}</Logo>
 
-        <Toggle />
+        <Toggle onClick={() => handleSidebar()} />
       </Content>
     </Container>
   );
