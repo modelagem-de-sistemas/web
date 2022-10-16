@@ -44,8 +44,6 @@ export default memo(createGlobalStyle`
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
 
-    --first-color: #6923D0;
-    --first-color: purple;
     --first-color-light: #F4F0FA;
     --title-color: #19181B;
     --text-color: #58555E;
