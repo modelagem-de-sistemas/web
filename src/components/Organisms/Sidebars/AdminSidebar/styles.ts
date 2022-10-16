@@ -13,7 +13,7 @@ export const Container = styled.nav<Props>`
   background-color: var(--container-color);
   box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
   z-index: var(--z-fixed);
-  transition: 0.4s;
+  transition: var(--transition);
 
   ${({ active }) =>
     active &&
@@ -25,46 +25,6 @@ export const Container = styled.nav<Props>`
         opacity: 1;
       }
     `}
-
-  .dropdown {
-    overflow: hidden;
-    max-height: 21px;
-    transition: 0.4s ease-in-out;
-
-    &-collapse {
-      background-color: var(--first-color-light);
-      border-radius: 0.25rem;
-      margin-top: 1rem;
-    }
-    &-content {
-      display: grid;
-      row-gap: 0.5rem;
-      padding: 0.75rem 2.5rem 0.75rem 1.8rem;
-    }
-
-    &-item {
-      font-size: var(--smaller-font-size);
-      font-weight: var(--font-medium);
-      color: var(--text-color);
-
-      &:hover {
-        color: var(--first-color);
-      }
-    }
-
-    &-icon {
-      margin-left: auto;
-      transition: 0.4s;
-    }
-
-    &:hover {
-      max-height: 100rem;
-    }
-
-    &:hover &-icon {
-      transform: rotate(180deg);
-    }
-  }
 
   @media screen and (min-width: 768px) {
     left: 0;

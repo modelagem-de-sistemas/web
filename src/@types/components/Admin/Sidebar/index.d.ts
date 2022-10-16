@@ -1,16 +1,16 @@
 type SidebarProps = {
-  title: string;
+  label: string;
   items: SidebarItem[];
 };
 
 type SidebarItem = {
-  title: string;
+  label: string;
   icon: JSX.Element;
-  url?: string;
+  href?: string;
   items?: SubSidebarItem[];
 };
 
 type SubSidebarItem = {
-  title: string;
-  url: string;
+  label: string;
+  href: string;
 };

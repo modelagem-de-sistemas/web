@@ -9,6 +9,7 @@ import { Container, Content, Heading, IconContainer, Items, List, Logo } from '.
 import Link from 'next/link';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { adminSidebar } from '@/constants/components/Admin/Sidebar';
+import SidebarDropdownListItem from '@/components/Molecules/ListItems/SidebarDropdownListItem';
 
 interface Props {
   handleSidebar: (open: boolean) => void;
@@ -42,26 +43,13 @@ const AdminSidebar: React.FC<Props> = (props) => {
           <List>
             {sidebar.map((item, index) => (
               <Items key={index}>
-                <Heading>{item.title}</Heading>
+                <Heading>{item.label}</Heading>
 
                 {item.items.map((listItem, index) => {
                   if (listItem?.items) {
-                    return (
-                      <div className="dropdown" key={index}>
-                        <SidebarListItem label={listItem.title} icon={listItem.icon} href={listItem.url} />
-                        <div className="dropdown-collapse">
-                          <div className="dropdown-content">
-                            {listItem.items.map((dropdownItem, indexDropdown) => (
-                              <a key={indexDropdown} href={dropdownItem.url} className="dropdown-item">
-                                {dropdownItem.title}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    );
+                    return <SidebarDropdownListItem key={index} item={listItem} />;
                   }
-                  return <SidebarListItem key={index} label={listItem.title} icon={listItem.icon} href={listItem.url} />;
+                  return <SidebarListItem key={index} label={listItem.label} icon={listItem.icon} href={listItem.href} />;
                 })}
               </Items>
             ))}

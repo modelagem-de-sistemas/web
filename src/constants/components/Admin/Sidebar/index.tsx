@@ -3,63 +3,63 @@ import { CgWebsite, CgBriefcase } from 'react-icons/cg';
 import { FiBook, FiFolder, FiHome, FiSettings, FiUser, FiMail } from 'react-icons/fi';
 
 const profileSidebar: SidebarProps = {
-  title: 'Profile',
+  label: 'Profile',
   items: [
     {
-      title: 'Home',
+      label: 'Home',
       icon: <FiHome />,
-      url: '/admin'
+      href: '/admin'
     },
     {
-      title: 'Profile',
+      label: 'Profile',
       icon: <FiUser />,
-      url: '/admin/profile',
+      href: '/admin/profile',
       items: [
         {
-          title: 'My Account',
-          url: '/admin/profile/my-account'
+          label: 'My Account',
+          href: '/admin/profile/my-account'
         },
         {
-          title: 'Contact',
-          url: '/admin/profile/contact'
+          label: 'Contact',
+          href: '/admin/profile/contact'
         }
       ]
     },
     {
-      title: 'Messages',
+      label: 'Messages',
       icon: <FiMail />,
-      url: '/admin/messages'
+      href: '/admin/messages'
     }
   ]
 };
 
 const exploreSidebar: SidebarProps = {
-  title: 'Explore',
+  label: 'Explore',
   items: [
     {
-      title: 'Homepage',
+      label: 'Homepage',
       icon: <CgWebsite />,
-      url: '/admin/explore/homepage'
+      href: '/admin/explore/homepage'
     },
     {
-      title: 'Educations',
+      label: 'Educations',
       icon: <FiBook />,
-      url: '/admin/explore/educations'
+      href: '/admin/explore/educations'
     },
     {
-      title: 'Skills',
+      label: 'Skills',
       icon: <FiSettings />,
-      url: '/admin/explore/skills'
+      href: '/admin/explore/skills'
     },
     {
-      title: 'Jobs',
+      label: 'Jobs',
       icon: <CgBriefcase />,
-      url: '/admin/explore/jobs'
+      href: '/admin/explore/jobs'
     },
     {
-      title: 'Projects',
+      label: 'Projects',
       icon: <FiFolder />,
-      url: '/admin/explore/projects'
+      href: '/admin/explore/projects'
     }
   ]
 };
