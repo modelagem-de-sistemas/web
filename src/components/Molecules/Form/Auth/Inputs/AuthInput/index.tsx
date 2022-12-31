@@ -12,7 +12,7 @@ interface Props {
 }
 
 const AuthInput: React.FC<Props> = (props) => {
-  const { id, type, placeholder, icon, onChange } = props;
+  const { id, type, placeholder, icon, onChange, value } = props;
 
   return (
     <Container id={id}>
