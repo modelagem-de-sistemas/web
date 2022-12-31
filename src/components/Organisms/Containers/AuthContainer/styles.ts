@@ -5,8 +5,11 @@ export const Container = styled.div`
 
   > header {
     justify-self: center;
+    display: flex;
+    align-items: center;
 
-    > img {
+    > img,
+    > svg {
       width: 310px;
       margin-top: 1.5rem;
     }
@@ -26,7 +29,8 @@ export const Container = styled.div`
       border-radius: 1rem;
       padding-left: 1rem;
 
-      > img {
+      > img,
+      > svg {
         width: 390px;
         margin-top: 0;
       }

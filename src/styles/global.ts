@@ -33,10 +33,10 @@ export default memo(createGlobalStyle`
     font-size: 16px !important;
     font-display: swap;
 
-    --color-theme: 250;
+    --color-theme: 1;
     --color-background: #FBFBFE;
     --first-color: hsl(var(--color-theme), 69%, 61%);
-    --first-color-dark: #23004d;
+    --first-color-dark: hsl(var(--color-theme), 100%, 15.1%);
     --first-color-second: hsl(var(--color-theme), 69%, 61%);
     --first-color-alt: hsl(var(--color-theme), 57%, 53%);
     --first-color-lighten: hsl(0, 0%, 94.9%);
@@ -47,10 +47,10 @@ export default memo(createGlobalStyle`
     --input-color: hsl(var(--color-theme), 70%, 96%);
     --body-color: hsl(var(--color-theme), 60%, 99%);
     --container-color: #FFF;
-    --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
-    --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+    --scroll-bar-color: hsl(var(--color-theme), 12%, 90%);
+    --scroll-thumb-color: hsl(var(--color-theme), 12%, 80%);
 
-    --first-color-light: #F4F0FA;
+    --first-color-light: hsl(var(--color-theme), 80%, 95%);
     --title-color: #19181B;
     --text-color: #58555E;
     --text-color-light: #A5A1AA;
