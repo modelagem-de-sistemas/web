@@ -7,15 +7,17 @@ interface Props {
   type: string;
   placeholder: string;
   icon: JSX.Element;
+  onChange: (value: string) => void;
+  value: string;
 }
 
 const AuthInput: React.FC<Props> = (props) => {
-  const { id, type, placeholder, icon } = props;
+  const { id, type, placeholder, icon, onChange } = props;
 
   return (
-    <Container>
+    <Container id={id}>
       {icon}
-      <input type={type} placeholder={placeholder} autoComplete="off" />
+      <input type={type} placeholder={placeholder} autoComplete="off" onChange={(e) => onChange(e.target.value)} value={value} />
     </Container>
   );
 };
