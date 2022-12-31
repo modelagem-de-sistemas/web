@@ -20,8 +20,6 @@ const AdminSidebar: React.FC<Props> = (props) => {
   const ref = useRef<any>(null);
   const sidebar = adminSidebar;
 
-  console.log('sidebar', sidebar);
-
   useOnClickOutside(ref, (): void => {
     props.handleSidebar(false);
   });
