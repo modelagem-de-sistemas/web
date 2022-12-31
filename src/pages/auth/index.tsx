@@ -1,10 +1,15 @@
 import type { NextPage } from 'next';
 import React from 'react';
 
-import LandingPage from '@/components/Templates/LandingPage';
+import AuthPage from '@/components/Templates/AuthPage';
+import AuthContainer from '@/components/Organisms/Containers/AuthContainer';
 
 const Login: NextPage = () => {
-  return <LandingPage></LandingPage>;
+  return (
+    <AuthPage>
+      <AuthContainer />
+    </AuthPage>
+  );
 };
 
 export default Login;

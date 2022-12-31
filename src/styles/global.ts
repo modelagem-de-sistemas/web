@@ -36,8 +36,10 @@ export default memo(createGlobalStyle`
     --color-theme: 250;
     --color-background: #FBFBFE;
     --first-color: hsl(var(--color-theme), 69%, 61%);
+    --first-color-dark: #23004d;
     --first-color-second: hsl(var(--color-theme), 69%, 61%);
     --first-color-alt: hsl(var(--color-theme), 57%, 53%);
+    --first-color-lighten: hsl(0, 0%, 94.9%);
     --first-color-lighter: hsl(var(--color-theme), 92%, 85%);
     --title-color: hsl(var(--color-theme), 8%, 15%);
     --text-color: hsl(var(--color-theme), 8%, 45%);
