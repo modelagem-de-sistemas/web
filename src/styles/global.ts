@@ -39,6 +39,7 @@ export default memo(createGlobalStyle`
     --first-color-dark: hsl(var(--color-theme), 100%, 15.1%);
     --first-color-second: hsl(var(--color-theme), 69%, 61%);
     --first-color-alt: hsl(var(--color-theme), 57%, 53%);
+    --first-color-light: hsl(var(--color-theme), 80%, 95%);
     --first-color-lighten: hsl(0, 0%, 94.9%);
     --first-color-lighter: hsl(var(--color-theme), 92%, 85%);
     --title-color: hsl(var(--color-theme), 8%, 15%);
@@ -50,14 +51,10 @@ export default memo(createGlobalStyle`
     --scroll-bar-color: hsl(var(--color-theme), 12%, 90%);
     --scroll-thumb-color: hsl(var(--color-theme), 12%, 80%);
 
-    --first-color-light: hsl(var(--color-theme), 80%, 95%);
-    --title-color: #19181B;
-    --text-color: #58555E;
-    --text-color-light: #A5A1AA;
-    --body-color: #F9F6FD;
-    --container-color: #FFFFFF;
+    --header-height: 3rem;
 
     --body-font: 'Poppins', sans-serif;
+    --z-fixed: 100;
 
 --normal-font-size: .938rem;
 --small-font-size: .75rem;
