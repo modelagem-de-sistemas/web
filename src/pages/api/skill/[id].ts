@@ -1,53 +1,29 @@
-import { skillValidation } from '@/utils/validations/skill';
-import { PrismaClient } from '@prisma/client';
+import { getSkill, removeSkill, updateSkill } from '@/lib/skill';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+const get = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const education = await getSkill(Number(req.query.id));
 
-const getSkill = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const skill = await prisma.skill.findFirst({
-    where: {
-      id: Number(req.query.id)
-    }
-  });
-
-  if (!skill) {
+  if (!education) {
     res.status(404).json({ message: 'Not found' });
     return;
   }
 
-  res.status(200).json(skill);
+  res.status(200).json(education);
 };
 
-const updateSkill = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const update = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const { name, description, credential } = req.body;
-
-    const skillData: SkillData = {
-      name,
-      description,
-      credential
-    };
-
-    await skillValidation(skillData);
-
-    const data = await prisma.skill.update({
-      where: { id: Number(req.query.id) },
-      data: skillData
-    });
-
+    const data = await updateSkill(Number(req.query.id), req.body);
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
   }
 };
 
-const deleteSkill = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const remove = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const data = await prisma.skill.delete({
-      where: { id: Number(req.query.id) }
-    });
-
+    const data = await removeSkill(Number(req.query.id));
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
@@ -57,12 +33,19 @@ const deleteSkill = async (req: NextApiRequest, res: NextApiResponse): Promise<v
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
   switch (req.method) {
     case 'GET':
-      return getSkill(req, res);
+      await get(req, res);
+      return;
+
     case 'PUT':
-      return updateSkill(req, res);
+      await update(req, res);
+      return;
+
     case 'DELETE':
-      return deleteSkill(req, res);
+      await remove(req, res);
+      return;
+
     default:
-      res.status(405).end(`Method ${req.method} Not Allowed`);
+      res.status(405).json({ message: 'Method not allowed' });
+      return;
   }
 }

@@ -1,28 +1,15 @@
-import { PrismaClient } from '@prisma/client';
+import { createSkillModule, getSkillsModules } from '@/lib/skill/module';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+const get = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const educations = await getSkillsModules();
 
-const getSkillModules = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const skillModules = await prisma.skillModule.findMany();
-
-  res.status(200).json(skillModules);
+  res.status(200).json(educations);
 };
 
-const createSkillModule = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const create = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const { name, description, skillId } = req.body;
-
-    const skillModuleData: SkillModuleData = {
-      name,
-      description,
-      skillId
-    };
-
-    const data = await prisma.skillModule.create({
-      data: skillModuleData
-    });
-
+    const data = await createSkillModule(req.body);
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
@@ -32,11 +19,11 @@ const createSkillModule = async (req: NextApiRequest, res: NextApiResponse): Pro
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
   switch (req.method) {
     case 'GET':
-      await getSkillModules(req, res);
+      await get(req, res);
       return;
 
     case 'POST':
-      await createSkillModule(req, res);
+      await create(req, res);
 
     default:
       res.status(405).json({ message: 'Method not allowed' });

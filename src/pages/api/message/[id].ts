@@ -1,53 +1,29 @@
-import { messageValidation } from '@/utils/validations/message';
-import { PrismaClient } from '@prisma/client';
+import { getMessage, removeMessage, updateMessage } from '@/lib/message';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+const get = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const education = await getMessage(Number(req.query.id));
 
-const getMessage = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const message = await prisma.message.findFirst({
-    where: {
-      id: Number(req.query.id)
-    }
-  });
-
-  if (!message) {
+  if (!education) {
     res.status(404).json({ message: 'Not found' });
     return;
   }
 
-  res.status(200).json(message);
+  res.status(200).json(education);
 };
 
-const updateMessage = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const update = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const { name, email, message } = req.body;
-
-    const messageData: MessageData = {
-      name,
-      email,
-      message
-    };
-
-    await messageValidation(messageData);
-
-    const data = await prisma.message.update({
-      where: { id: Number(req.query.id) },
-      data: messageData
-    });
-
+    const data = await updateMessage(Number(req.query.id), req.body);
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
   }
 };
 
-const deleteMessage = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const remove = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const data = await prisma.message.delete({
-      where: { id: Number(req.query.id) }
-    });
-
+    const data = await removeMessage(Number(req.query.id));
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
@@ -57,16 +33,19 @@ const deleteMessage = async (req: NextApiRequest, res: NextApiResponse): Promise
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
   switch (req.method) {
     case 'GET':
-      await getMessage(req, res);
-      break;
+      await get(req, res);
+      return;
+
     case 'PUT':
-      await updateMessage(req, res);
-      break;
+      await update(req, res);
+      return;
+
     case 'DELETE':
-      await deleteMessage(req, res);
-      break;
+      await remove(req, res);
+      return;
+
     default:
-      res.status(400).json({ message: 'Bad request' });
-      break;
+      res.status(405).json({ message: 'Method not allowed' });
+      return;
   }
 }

@@ -1,33 +1,15 @@
-import { educationValidation } from '@/utils/validations/education';
-import { PrismaClient } from '@prisma/client';
+import { createEducation, getEducations } from '@/lib/education';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
-
-const getEducations = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const educations = await prisma.education.findMany();
+const get = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const educations = await getEducations();
 
   res.status(200).json(educations);
 };
 
-const createEducation = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const create = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const { name, description, startDate, endDate, school } = req.body;
-
-    const educationData: EducationData = {
-      name,
-      description,
-      startDate,
-      endDate,
-      school
-    };
-
-    await educationValidation(educationData);
-
-    const data = await prisma.education.create({
-      data: educationData
-    });
-
+    const data = await createEducation(req.body);
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
@@ -37,11 +19,11 @@ const createEducation = async (req: NextApiRequest, res: NextApiResponse): Promi
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
   switch (req.method) {
     case 'GET':
-      await getEducations(req, res);
+      await get(req, res);
       return;
 
     case 'POST':
-      await createEducation(req, res);
+      await create(req, res);
 
     default:
       res.status(405).json({ message: 'Method not allowed' });

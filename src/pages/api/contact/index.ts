@@ -1,39 +1,15 @@
-import { contactValidation } from '@/utils/validations/contact';
-import { PrismaClient } from '@prisma/client';
+import { getContact, updateContact } from '@/lib/contact';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
-
-const getContact = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const contact = await prisma.contact.findFirst();
-
-  if (!contact) {
-    res.status(404).json({ message: 'Not found' });
-    return;
-  }
+const get = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const contact = await getContact();
 
   res.status(200).json(contact);
 };
 
-const updateContact = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const update = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const { email, phone, description, linkedin, github, instagram } = req.body;
-
-    const contactData: ContactData = {
-      email,
-      phone,
-      description,
-      linkedin,
-      github,
-      instagram
-    };
-
-    await contactValidation(contactData);
-
-    const data = await prisma.contact.update({
-      where: { id: 1 },
-      data: contactData
-    });
+    const data = await updateContact(req.body);
 
     res.status(200).json(data);
   } catch (e) {
@@ -44,11 +20,11 @@ const updateContact = async (req: NextApiRequest, res: NextApiResponse): Promise
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
   switch (req.method) {
     case 'GET':
-      await getContact(req, res);
+      await get(req, res);
       return;
 
     case 'PUT':
-      await updateContact(req, res);
+      await update(req, res);
 
     default:
       res.status(405).json({ message: 'Method not allowed' });

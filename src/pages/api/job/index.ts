@@ -1,34 +1,15 @@
-import { jobValidation } from '@/utils/validations/job';
-import { PrismaClient } from '@prisma/client';
+import { createJob, getJobs } from '@/lib/job';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+const get = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const educations = await getJobs();
 
-const getJobs = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const jobs = await prisma.job.findMany();
-
-  res.status(200).json(jobs);
+  res.status(200).json(educations);
 };
 
-const createJob = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const create = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {
-    const { name, description, startDate, endDate, company, office } = req.body;
-
-    const jobData: JobData = {
-      name,
-      description,
-      startDate,
-      endDate,
-      company,
-      office
-    };
-
-    await jobValidation(jobData);
-
-    const data = await prisma.job.create({
-      data: jobData
-    });
-
+    const data = await createJob(req.body);
     res.status(200).json(data);
   } catch (e) {
     res.status(400).json({ message: e });
@@ -38,11 +19,11 @@ const createJob = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
   switch (req.method) {
     case 'GET':
-      await getJobs(req, res);
+      await get(req, res);
       return;
 
     case 'POST':
-      await createJob(req, res);
+      await create(req, res);
 
     default:
       res.status(405).json({ message: 'Method not allowed' });
