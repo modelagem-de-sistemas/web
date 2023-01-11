@@ -1,35 +1,32 @@
 import AuthButton from '@/components/Molecules/Form/Auth/Inputs/AuthButton';
 import AuthInput from '@/components/Molecules/Form/Auth/Inputs/AuthInput';
-import React, { useState } from 'react';
+import { login } from '@/lib/auth';
+import { authLogin } from '@/services/auth';
+import React, { useRef } from 'react';
 import { CgLock, CgMail } from 'react-icons/cg';
 import { ForgotPassword } from '../styles';
 import { Container } from './styles';
 
 const FormAuthSignIn: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const submit = async (e) => {
+    const emailValue: string = emailRef?.current?.value || '';
+    const passwordValue: string = passwordRef?.current?.value || '';
+
+    const response = await authLogin(emailValue, passwordValue)
+      .then((res) => res)
+      .catch((err) => err);
+  };
 
   return (
     <Container>
       <h1>Sign In</h1>
 
-      <AuthInput
-        type="text"
-        placeholder="E-mail"
-        icon={<CgMail color="var(--first-color)" />}
-        id="mail"
-        onChange={setEmail}
-        value={email}
-      />
+      <AuthInput ref={emailRef} type="text" placeholder="E-mail" icon={<CgMail color="var(--first-color)" />} id="mail" />
 
-      <AuthInput
-        type="password"
-        placeholder="Password"
-        icon={<CgLock color="var(--first-color)" />}
-        id="password"
-        onChange={setPassword}
-        value={password}
-      />
+      <AuthInput ref={passwordRef} type="password" placeholder="Password" icon={<CgLock color="var(--first-color)" />} id="password" />
 
       <ForgotPassword href="#">Forgot password?</ForgotPassword>
 

@@ -1,10 +1,10 @@
 import { comparePassword, createToken } from '@/utils/helpers/auth';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 const login = async (email: string, password: string): Promise<any> => {
-  const user = await prisma.user.findUnique({
+  const user: User | null = await prisma.user.findUnique({
     where: {
       email
     }

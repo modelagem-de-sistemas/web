@@ -9,5 +9,11 @@ module.exports = {
   },
   images: {
     domains: ['i.ytimg.com']
+  },
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+
+    return config;
   }
 };

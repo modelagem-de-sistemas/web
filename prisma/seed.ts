@@ -8,7 +8,14 @@ async function main() {
       email: 'gabriella.carvalho@gmail.com',
       name: 'Gabriella Carvalho',
       password: '123456',
-      contact: {
+      Homepage: {
+        create: {
+          title: 'Gabriella Carvalho',
+          meta: 'Desenvolvedora Front-end',
+          color: '200'
+        }
+      },
+      Contact: {
         create: {
           email: 'gabriella.carvalho@gmail.com',
           phone: '',
@@ -21,17 +28,7 @@ async function main() {
     }
   });
 
-  const homepage = await prisma.homepage.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      title: 'Gabriella Carvalho',
-      meta: 'Gabriella Carvalho',
-      color: '200'
-    }
-  });
-
-  console.log({ admin, homepage });
+  console.log({ admin });
 }
 main()
   .then(async () => {
