@@ -2,17 +2,23 @@ import type { NextPage } from 'next';
 import React from 'react';
 
 import DashboardPage from '@/components/Templates/DashboardPage';
-import TableView from '@/components/Templates/TableView';
+import FormMaker from '@/components/Organisms/Forms/FormMaker';
+import api from '@/services/apis';
 
 
-const DashboardEducation: NextPage = () => {
+const DashboardEducationCreate: NextPage = () => {
+  const submit = () => {
+    api.post("/education");
+  }
+    
   return (
     <DashboardPage>
-      <h1>Educations</h1>
-      <TableView content={test}/>
+        <h1>Educations</h1>
+    
+
 
     </DashboardPage>
   );
 };
 
-export default DashboardEducation;
+export default DashboardEducationCreate;

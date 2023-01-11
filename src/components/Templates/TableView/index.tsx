@@ -3,36 +3,53 @@ import { Container, Content, Line, Cell } from './styles';
 import { AiOutlineDelete  } from 'react-icons/ai';
 import { BsPencil } from 'react-icons/bs';
 import api from '@/services/apis';
+import { useRouter } from 'next/router'
+
 
 interface Props {
-  content: EducationData[];
+  content: any[];
   type: string;
 }
 
 const TableView: React.FC<Props> = ({content, type} : Props) => {
+  const router = useRouter()
+
   const handleDelete = (id: number) => {
     const result = confirm(`Tem certeza da deleção do item de ID ${id} ?`)
     
     let url;
     switch (type){
       case "education":
-        url = "/education/";
+        url = "education/";
+        break;
+      case "jobs":
+        url = "jobs/";
+        break;
     }
 
     if (result){
-
         api.delete(`/${url}${id}`)
-        .then(succes => alert(succes))
-        .catch(err => alert(err));
-   
+        .then(succes => {alert(succes.data)})
+        .catch(err => alert(err));   
     }
   }
 
   const handleUpdate = (id: number) => {
-    window.location.href = `${window.location}/${id}/update`
+    let url;
+    switch (type){
+      case "education":
+        url = "educations/";
+        break;
+      case "jobs":
+        url = "jobs/";
+        break;
+    }
+
+    router.push(`${url}/${id}/update`);
   }
 
   return (
+    content[0] != null && (
     <Container>
       <Content> 
 
@@ -45,7 +62,7 @@ const TableView: React.FC<Props> = ({content, type} : Props) => {
 
           </Line>  
 
-          {content?.map( (object: any) => (
+          {content.map( (object: any) => (
             <Line>   
 
               {Object.keys(object).map( (item: any) => (
@@ -58,7 +75,7 @@ const TableView: React.FC<Props> = ({content, type} : Props) => {
             </Line> 
           ))}
       </Content>
-    </Container>
+    </Container>)
   );
 };
 
