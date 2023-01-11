@@ -22,6 +22,8 @@ const createEducation = async (_educationData: EducationData): Promise<any> => {
   try {
     const { name, description, startDate, endDate, school } = _educationData;
 
+    console.log(_educationData);
+
     const educationData: EducationData = {
       name,
       description,
