@@ -1,3 +1,4 @@
+import { jobValidation } from '@/utils/validations/job';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -25,11 +26,13 @@ const createJob = async (_jobData: JobData): Promise<any> => {
     const jobData: JobData = {
       name,
       description,
-      startDate,
-      endDate,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       company,
       office
     };
+
+    await jobValidation(jobData);
 
     const data = await prisma.job.create({
       data: jobData
@@ -48,11 +51,13 @@ const updateJob = async (id: number, _jobData: JobData): Promise<any> => {
     const jobData: JobData = {
       name,
       description,
-      startDate,
-      endDate,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       company,
       office
     };
+
+    await jobValidation(jobData);
 
     const data = await prisma.job.update({
       where: { id: id },

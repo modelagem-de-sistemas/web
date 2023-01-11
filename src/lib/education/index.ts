@@ -1,3 +1,4 @@
+import { educationValidation } from '@/utils/validations/education';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -22,15 +23,15 @@ const createEducation = async (_educationData: EducationData): Promise<any> => {
   try {
     const { name, description, startDate, endDate, school } = _educationData;
 
-    console.log(_educationData);
-
     const educationData: EducationData = {
       name,
       description,
-      startDate,
-      endDate,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       school
     };
+
+    await educationValidation(educationData);
 
     const data = await prisma.education.create({
       data: educationData
@@ -38,6 +39,7 @@ const createEducation = async (_educationData: EducationData): Promise<any> => {
 
     return data;
   } catch (e) {
+    console.log(e);
     throw e;
   }
 };
@@ -49,10 +51,12 @@ const updateEducation = async (id: number, _educationData: EducationData): Promi
     const educationData: EducationData = {
       name,
       description,
-      startDate,
-      endDate,
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       school
     };
+
+    await educationValidation(educationData);
 
     const data = await prisma.education.update({
       where: { id: id },

@@ -1,3 +1,4 @@
+import { projectValidation } from '@/utils/validations/project';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -29,6 +30,9 @@ const createProject = async (_projectData: ProjectData): Promise<any> => {
       html,
       jobId
     };
+
+    await projectValidation(projectData);
+
     const data = await prisma.project.create({
       data: projectData
     });
@@ -50,6 +54,8 @@ const updateProject = async (id: number, _projectData: ProjectData): Promise<any
       html,
       jobId
     };
+
+    await projectValidation(projectData);
 
     const data = await prisma.project.update({
       where: { id: id },
