@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
-const getContact = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const getContact = async (_req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const contact = await prisma.contact.findFirst();
 
   if (!contact) {

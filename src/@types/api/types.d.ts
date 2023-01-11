@@ -34,7 +34,7 @@ type JobData = {
   id?: number;
   name: string;
   description: string;
-  business: string;
+  company: string;
   office: string;
   startDate: Date;
   endDate: Date;
@@ -73,7 +73,7 @@ type SkillData = {
   updatedAt?: Date;
 };
 
-type SkillModulesData = {
+type SkillModuleData = {
   id?: number;
   name: string;
   description: string;

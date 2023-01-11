@@ -21,7 +21,17 @@ async function main() {
     }
   });
 
-  console.log({ admin });
+  const homepage = await prisma.homepage.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      title: 'Gabriella Carvalho',
+      meta: 'Gabriella Carvalho',
+      color: '200'
+    }
+  });
+
+  console.log({ admin, homepage });
 }
 main()
   .then(async () => {

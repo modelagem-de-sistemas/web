@@ -1,14 +1,4 @@
 -- CreateTable
-CREATE TABLE "Homepage" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "title" TEXT NOT NULL,
-    "meta" TEXT NOT NULL,
-    "color" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
-);
-
--- CreateTable
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
@@ -23,14 +13,24 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
+CREATE TABLE "Homepage" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "meta" TEXT NOT NULL,
+    "color" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "Contact" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "email" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "linkedin" TEXT NOT NULL,
-    "github" TEXT NOT NULL,
-    "instagram" TEXT NOT NULL,
+    "phone" TEXT,
+    "description" TEXT,
+    "linkedin" TEXT,
+    "github" TEXT,
+    "instagram" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
@@ -40,7 +40,7 @@ CREATE TABLE "Job" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "business" TEXT NOT NULL,
+    "company" TEXT NOT NULL,
     "office" TEXT NOT NULL,
     "startDate" DATETIME NOT NULL,
     "endDate" DATETIME NOT NULL,
@@ -84,14 +84,14 @@ CREATE TABLE "Skill" (
 );
 
 -- CreateTable
-CREATE TABLE "SkillModules" (
+CREATE TABLE "SkillModule" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "skillId" INTEGER NOT NULL,
-    CONSTRAINT "SkillModules_skillId_fkey" FOREIGN KEY ("skillId") REFERENCES "Skill" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "SkillModule_skillId_fkey" FOREIGN KEY ("skillId") REFERENCES "Skill" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -103,6 +103,9 @@ CREATE TABLE "Message" (
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_contactId_key" ON "User"("contactId");
