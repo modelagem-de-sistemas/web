@@ -19,7 +19,7 @@ const getJobs = async (): Promise<Job[]> => {
   return jobs;
 };
 
-const createJob = async (_jobData: JobData, user: User): Promise<any> => {
+const createJob = async (_jobData: JobData, user: User): Promise<Job> => {
   try {
     const { name, description, startDate, endDate, company, office } = _jobData;
 
@@ -34,23 +34,23 @@ const createJob = async (_jobData: JobData, user: User): Promise<any> => {
 
     await jobValidation(jobData);
 
-    const createPost = await prisma.job.create({
+    const data = await prisma.job.create({
+      // @ts-ignore
       data: {
-        title: 'How to make croissants',
-        author: {
+        ...jobData,
+        User: {
           connectOrCreate: {
             where: {
-              email: 'viola@prisma.io'
+              email: user.email
             },
             create: {
-              email: 'viola@prisma.io',
-              name: 'Viola'
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              password: user.password
             }
           }
         }
-      },
-      include: {
-        author: true
       }
     });
 

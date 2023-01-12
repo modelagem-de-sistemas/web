@@ -1,9 +1,9 @@
 import { messageValidation } from '@/utils/validations/message';
-import { PrismaClient } from '@prisma/client';
+import { Message, PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getMessage = async (id: number): Promise<any> => {
+const getMessage = async (id: number): Promise<Message | null> => {
   const message = await prisma.message.findFirst({
     where: {
       id: id
@@ -13,13 +13,13 @@ const getMessage = async (id: number): Promise<any> => {
   return message;
 };
 
-const getMessages = async (): Promise<any> => {
+const getMessages = async (): Promise<Message[]> => {
   const messages = await prisma.message.findMany();
 
   return messages;
 };
 
-const createMessage = async (_messageData: MessageData): Promise<any> => {
+const createMessage = async (_messageData: MessageData, user: User): Promise<Message> => {
   const { name, email, message } = _messageData;
 
   const messageData: MessageData = {
@@ -31,13 +31,29 @@ const createMessage = async (_messageData: MessageData): Promise<any> => {
   await messageValidation(messageData);
 
   const data = await prisma.message.create({
-    data: messageData
+    // @ts-ignore
+    data: {
+      ...messageData,
+      User: {
+        connectOrCreate: {
+          where: {
+            email: user.email
+          },
+          create: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            password: user.password
+          }
+        }
+      }
+    }
   });
 
   return data;
 };
 
-const updateMessage = async (id: number, _messageData: MessageData): Promise<any> => {
+const updateMessage = async (id: number, _messageData: MessageData): Promise<Message> => {
   try {
     const { name, email, message } = _messageData;
 

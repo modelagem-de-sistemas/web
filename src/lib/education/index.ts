@@ -19,7 +19,7 @@ const getEducations = async (): Promise<Education[]> => {
   return educations;
 };
 
-const createEducation = async (_educationData: EducationData, user: User): Promise<any> => {
+const createEducation = async (_educationData: EducationData, user: User): Promise<Education> => {
   try {
     const { name, description, startDate, endDate, school } = _educationData;
 
@@ -33,30 +33,25 @@ const createEducation = async (_educationData: EducationData, user: User): Promi
 
     await educationValidation(educationData);
 
-    const data = await prisma.user.update({
-      where: { id: user.id },
+    const data = await prisma.education.create({
+      // @ts-ignore
       data: {
-        Educations: {
-          create: [{ ...educationData }]
+        ...educationData,
+        User: {
+          connectOrCreate: {
+            where: {
+              email: user.email
+            },
+            create: {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              password: user.password
+            }
+          }
         }
       }
     });
-
-    // const data = await prisma.education.create({
-    //   data: {
-    //     ..._educationData,
-    //     User: {
-    //       connect: {
-    //         where: {
-    //           email: user.id
-    //         }
-    //       }
-    //     }
-    //   },
-    //   include: {
-    //     User: true
-    //   }
-    // });
 
     return data;
   } catch (e) {
