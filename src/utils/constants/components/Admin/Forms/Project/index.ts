@@ -78,4 +78,4 @@ export const projectFormSchema = (project: ProjectData): IFormMakerInput[][] => 
   return baseStructure;
 };
 
-export const projectTableHeaders: string[] = ['Id', 'Name', 'Description', 'Url', 'Html'];
+export const projectTableHeaders: string[] = ['id', 'name', 'description', 'url', 'html'];

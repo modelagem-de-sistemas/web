@@ -37,3 +37,5 @@ export const homepageFormSchema = (homepage: HomepageData): IFormMakerInput[][] 
     ]
   ];
 };
+
+export const homePageTableHeaders: string[] = ['title', 'description', 'color'];

@@ -36,8 +36,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   const educations = await getEducations();
 
-  console.log(educations);
-
   return {
     props: {
       educations: JSON.parse(JSON.stringify(educations))

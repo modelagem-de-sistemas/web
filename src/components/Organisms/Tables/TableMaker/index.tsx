@@ -35,9 +35,15 @@ const TableMaker: React.FC<Props> = ({ content, handleModal, headers }) => {
           {content.length > 0 ? (
             content.map((object: any) => (
               <tr>
-                {Object.keys(object).map((_item: any, index: number) => (
-                  <td data-label={headers[index]}> {formatData(object[headers[index]].toString())} </td>
-                ))}
+
+                {Object.keys(object).map((_item: any, index: number) => {
+
+                  if (object[headers[index]])
+                    return (
+                      <td data-label={headers[index]}> {formatData(object[headers[index]].toString())} </td>
+                    );
+                }
+                )}
 
                 <td data-label="Update" onClick={() => handleModal('update')}>
                   <TableButton>Update</TableButton>

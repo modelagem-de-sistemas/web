@@ -1,15 +1,46 @@
-import type { NextPage } from 'next';
-import React from 'react';
+import type { GetServerSideProps, NextPage } from 'next';
+import React, { useState } from 'react';
 
 import DashboardPage from '@/components/Templates/DashboardPage';
+import DashboardHeader from '@/components/Organisms/Containers/DashboardHeader';
+import TableMaker from '@/components/Organisms/Tables/TableMaker';
+import { jobTableHeaders } from '@/utils/constants/components/Admin/Forms/Job';
+import { getJobs } from '@/lib/job';
 
-const DashboardEducation: NextPage = () => {
+interface Props {
+  jobs: JobData[];
+}
+
+const DashboardJobs: NextPage<Props> = ({ jobs }) => {
+  const [modal, setModal] = useState<string>('');
+
   return (
     <DashboardPage>
-      <h1>Educations</h1>
-      <p>Here you can add, edit and delete educations. You can also add, edit and delete education categories.</p>
+      <DashboardHeader title="Jobs" description="Here you can manage your jobs history and qualification." handleModal={setModal} />
+      <TableMaker content={jobs} handleModal={setModal} headers={jobTableHeaders} />
     </DashboardPage>
   );
 };
 
-export default DashboardEducation;
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false
+      }
+    };
+  }
+
+  const jobs = await getJobs();
+
+  return {
+    props: {
+      jobs: JSON.parse(JSON.stringify(jobs))
+    }
+  };
+};
+
+export default DashboardJobs;
