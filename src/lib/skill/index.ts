@@ -1,25 +1,28 @@
 import { skillValidation } from '@/utils/validations/skill';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Skill, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getSkill = async (id: number): Promise<any> => {
+const getSkill = async (id: number): Promise<Skill | null> => {
   const skill = await prisma.skill.findFirst({
     where: {
       id: id
+    },
+    include: {
+      SkillModules: true
     }
   });
 
   return skill;
 };
 
-const getSkills = async (): Promise<any> => {
+const getSkills = async (): Promise<Skill[]> => {
   const skills = await prisma.skill.findMany();
 
   return skills;
 };
 
-const createSkill = async (_skillData: SkillData): Promise<any> => {
+const createSkill = async (_skillData: SkillData, user: User): Promise<Skill> => {
   const { name, description, credential } = _skillData;
 
   const skillData: SkillData = {
@@ -31,7 +34,23 @@ const createSkill = async (_skillData: SkillData): Promise<any> => {
   await skillValidation(skillData);
 
   const data = await prisma.skill.create({
-    data: skillData
+    // @ts-ignore
+    data: {
+      ...skillData,
+      User: {
+        connectOrCreate: {
+          where: {
+            id: user.id
+          },
+          create: {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            password: user.password
+          }
+        }
+      }
+    }
   });
 
   return data;
