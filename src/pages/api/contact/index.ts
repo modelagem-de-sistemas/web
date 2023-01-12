@@ -18,7 +18,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
   }
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
+export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   try {
     middleware(req);
 
