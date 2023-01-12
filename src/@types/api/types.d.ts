@@ -50,7 +50,7 @@ type ProjectData = {
   html: string;
   createdAt?: Date;
   updatedAt?: Date;
-  jobId: number | null;
+  jobId?: number | null;
 };
 
 type EducationData = {

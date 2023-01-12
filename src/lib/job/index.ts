@@ -7,6 +7,9 @@ const getJob = async (id: number): Promise<Job | null> => {
   const job = await prisma.job.findFirst({
     where: {
       id: id
+    },
+    include: {
+      Project: true
     }
   });
 

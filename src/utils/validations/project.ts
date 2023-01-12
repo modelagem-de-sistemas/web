@@ -8,7 +8,7 @@ const projectValidation = async (project: ProjectData): Promise<any> => {
     description: Validator.string().required(),
     url: Validator.string().required(),
     html: Validator.string().required(),
-    jobId: Validator.number()
+    jobId: Validator.number().nullable()
   });
 
   try {

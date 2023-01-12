@@ -1,5 +1,5 @@
 import { projectValidation } from '@/utils/validations/project';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -19,7 +19,7 @@ const getProjects = async (): Promise<any> => {
   return projects;
 };
 
-const createProject = async (_projectData: ProjectData): Promise<any> => {
+const createProject = async (_projectData: ProjectData, user: User): Promise<any> => {
   try {
     const { name, description, url, html, jobId } = _projectData;
 
@@ -27,17 +27,57 @@ const createProject = async (_projectData: ProjectData): Promise<any> => {
       name,
       description,
       url,
-      html,
-      jobId
+      html
     };
 
     await projectValidation(projectData);
 
-    const data = await prisma.project.create({
-      data: projectData
-    });
+    if (jobId) {
+      return await prisma.project.create({
+        // @ts-ignore
+        data: {
+          ...projectData,
+          Job: {
+            connect: {
+              id: jobId
+            }
+          },
+          User: {
+            connectOrCreate: {
+              where: {
+                email: user.email
+              },
+              create: {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                password: user.password
+              }
+            }
+          }
+        }
+      });
+    }
 
-    return data;
+    return await prisma.project.create({
+      // @ts-ignore
+      data: {
+        ...projectData,
+        User: {
+          connectOrCreate: {
+            where: {
+              email: user.email
+            },
+            create: {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              password: user.password
+            }
+          }
+        }
+      }
+    });
   } catch (e) {
     throw e;
   }

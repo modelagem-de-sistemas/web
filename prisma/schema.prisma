@@ -76,8 +76,7 @@ model Project {
   updatedAt   DateTime @updatedAt
   User        User     @relation(fields: [userId], references: [id])
   userId      Int
-  Job         Job?     @relation(fields: [jobId], references: [id])
-  jobId       Int?
+  Job         Job[]
 }
 
 model Education {
