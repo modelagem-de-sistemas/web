@@ -1,8 +1,8 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import DashboardPage from '@/components/Templates/DashboardPage';
-import DashboardHeader from '@/components/Organisms/Containers/DashboardIntro';
+import DashboardHeader from '@/components/Organisms/Containers/DashboardHeader';
 import { getEducations } from '@/lib/education';
 import TableMaker from '@/components/Organisms/Tables/TableMaker';
 
@@ -11,10 +11,12 @@ interface Props {
 }
 
 const DashboardEducation: NextPage<Props> = ({ educations }) => {
+  const [modal, setModal] = useState<string>('');
+
   return (
     <DashboardPage>
-      <DashboardHeader title="Educations" description="Here you can manage your educations." />
-      <TableMaker content={educations} apiPath="education" />
+      <DashboardHeader title="Educations" description="Here you can manage your educations." handleModal={setModal} />
+      <TableMaker content={educations} handleModal={setModal} />
     </DashboardPage>
   );
 };

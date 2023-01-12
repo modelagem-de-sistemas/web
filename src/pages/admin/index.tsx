@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import React from 'react';
 
 import DashboardPage from '@/components/Templates/DashboardPage';
-import DashboardIntro from '@/components/Organisms/Containers/DashboardIntro';
+import DashboardIntro from '@/components/Organisms/Containers/DashboardHeader';
 
 const DashboardHome: NextPage = () => {
   return (

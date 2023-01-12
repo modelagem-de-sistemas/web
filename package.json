@@ -40,8 +40,7 @@
     "styled-components": "^5.3.6",
     "swiper": "^8.4.4",
     "ts-node": "^10.9.1",
-    "yup": "^0.32.11",
-    "yup-locale-pt": "^0.0.9"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.2",

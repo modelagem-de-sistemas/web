@@ -1,28 +1,15 @@
 import React from 'react';
-import { Container, TableButton } from './styles';
-import api from '@/services/apis';
+import { Container } from './styles';
 import { camelCaseToOriginalCase } from '@/utils/helpers/string';
 import { isDate, toDDMMYYYY } from '@/utils/helpers/time';
-import Link from 'next/link';
+import TableButton from '@/components/Molecules/Buttons/TableButton';
 
 interface Props {
   content: any[];
-  apiPath: string;
+  handleModal: (modal: string) => void;
 }
 
-const TableMaker: React.FC<Props> = ({ content, apiPath }) => {
-  const createPath = `create`;
-  const updatePath = (id: string) => id;
-
-  const handleDelete = (id: number) => {
-    api
-      .delete(`/${apiPath}/${id}`)
-      .then((success) => {
-        alert(success.data);
-      })
-      .catch((err) => alert(err));
-  };
-
+const TableMaker: React.FC<Props> = ({ content, handleModal }) => {
   const formatData = (data: any) => {
     if (isDate(data)) {
       return toDDMMYYYY(new Date(data));
@@ -35,41 +22,33 @@ const TableMaker: React.FC<Props> = ({ content, apiPath }) => {
 
   return (
     <Container>
-      <header>
-        <Link href={createPath} passHref>
-          <TableButton>Create</TableButton>
-        </Link>
-      </header>
-
-      <main>
-        <table>
-          <thead>
-            <tr>
-              {headers.map((headerItem) => (
-                <th>{camelCaseToOriginalCase(headerItem)} </th>
-              ))}
-              <th> Update </th>
-              <th> Delete </th>
-            </tr>
-          </thead>
-          <tbody>
-            {content.map((object: any) => (
-              <tr>
-                {Object.keys(object).map((item: any, index: number) => (
-                  <td data-label={headers[index]}> {formatData(object[item].toString())} </td>
-                ))}
-
-                <td data-label="Update">
-                  <TableButton>Update</TableButton>
-                </td>
-                <td data-label="Delete" onClick={() => handleDelete(object['id'])}>
-                  <TableButton>Delete</TableButton>
-                </td>
-              </tr>
+      <table>
+        <thead>
+          <tr>
+            {headers.map((headerItem) => (
+              <th>{camelCaseToOriginalCase(headerItem)} </th>
             ))}
-          </tbody>
-        </table>
-      </main>
+            <th> Update </th>
+            <th> Delete </th>
+          </tr>
+        </thead>
+        <tbody>
+          {content.map((object: any) => (
+            <tr>
+              {Object.keys(object).map((item: any, index: number) => (
+                <td data-label={headers[index]}> {formatData(object[item].toString())} </td>
+              ))}
+
+              <td data-label="Update" onClick={() => handleModal('update')}>
+                <TableButton>Update</TableButton>
+              </td>
+              <td data-label="Delete" onClick={() => handleModal('delete')}>
+                <TableButton>Delete</TableButton>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </Container>
   );
 };

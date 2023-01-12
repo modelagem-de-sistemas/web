@@ -5,6 +5,10 @@ export const Container = styled.div`
     max-width: 1200px;
     padding: calc(var(--header-height) + 2rem) 3rem 3rem 6rem;
 
+    > * {
+      margin-bottom: 1rem;
+    }
+
     @media screen and (max-width: 768px) {
       padding: calc(var(--header-height) + 1rem) 1rem 0 1rem;
     }
