@@ -1,15 +1,15 @@
 import { contactValidation } from '@/utils/validations/contact';
-import { PrismaClient } from '@prisma/client';
+import { Contact, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getContact = async (): Promise<any> => {
+const getContact = async (): Promise<Contact | null> => {
   const contact = await prisma.contact.findFirst();
 
   return contact;
 };
 
-const updateContact = async (_contactData: ContactData): Promise<any> => {
+const updateContact = async (_contactData: ContactData): Promise<Contact> => {
   try {
     const { email, phone, description, linkedin, github, instagram } = _contactData;
 

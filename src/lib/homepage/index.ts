@@ -3,13 +3,13 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getHomepage = async (): Promise<any> => {
+const getHomepage = async (): Promise<Homepage> => {
   const homepage = await prisma.homepage.findFirst();
 
   return homepage;
 };
 
-const updateHomepage = async (_homepageData: HomepageData): Promise<any> => {
+const updateHomepage = async (_homepageData: HomepageData): Promise<Homepage> => {
   try {
     const { title, meta, color } = _homepageData;
 

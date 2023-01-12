@@ -1,9 +1,9 @@
 import { educationValidation } from '@/utils/validations/education';
-import { PrismaClient, User } from '@prisma/client';
+import { PrismaClient, User, Education } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getEducation = async (id: number): Promise<any> => {
+const getEducation = async (id: number): Promise<Education | null> => {
   const education = await prisma.education.findFirst({
     where: {
       id: id
@@ -13,7 +13,7 @@ const getEducation = async (id: number): Promise<any> => {
   return education;
 };
 
-const getEducations = async (): Promise<any> => {
+const getEducations = async (): Promise<Education[]> => {
   const educations = await prisma.education.findMany();
 
   return educations;
@@ -42,6 +42,22 @@ const createEducation = async (_educationData: EducationData, user: User): Promi
       }
     });
 
+    // const data = await prisma.education.create({
+    //   data: {
+    //     ..._educationData,
+    //     User: {
+    //       connect: {
+    //         where: {
+    //           email: user.id
+    //         }
+    //       }
+    //     }
+    //   },
+    //   include: {
+    //     User: true
+    //   }
+    // });
+
     return data;
   } catch (e) {
     console.log(e);
@@ -49,7 +65,7 @@ const createEducation = async (_educationData: EducationData, user: User): Promi
   }
 };
 
-const updateEducation = async (id: number, _educationData: EducationData): Promise<any> => {
+const updateEducation = async (id: number, _educationData: EducationData): Promise<Education> => {
   try {
     const { name, description, startDate, endDate, school } = _educationData;
 
