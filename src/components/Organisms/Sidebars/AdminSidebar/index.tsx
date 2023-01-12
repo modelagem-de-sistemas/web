@@ -8,7 +8,7 @@ import { RiDashboardFill } from 'react-icons/ri';
 import { Container, Content, Heading, IconContainer, Items, List, Logo } from './styles';
 import Link from 'next/link';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
-import { adminSidebar } from '@/constants/components/Admin/Sidebar';
+import { adminSidebar } from '@/utils/constants/components/Admin/Sidebar';
 import SidebarDropdownListItem from '@/components/Molecules/ListItems/SidebarDropdownListItem';
 
 interface Props {

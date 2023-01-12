@@ -65,3 +65,5 @@ export const skillFormSchema = (skill: SkillData): IFormMakerInput[][] => {
 
   return baseStructure;
 };
+
+export const skillTableHeaders: string[] = ['name', 'description', 'credential'];

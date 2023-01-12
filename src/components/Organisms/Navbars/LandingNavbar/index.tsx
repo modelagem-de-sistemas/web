@@ -1,4 +1,4 @@
-import { landingNavbarItems } from '@/constants/components/Landing/Navbar';
+import { landingNavbarItems } from '@/utils/constants/components/Landing/Navbar';
 import React from 'react';
 
 import { Container } from './styles';

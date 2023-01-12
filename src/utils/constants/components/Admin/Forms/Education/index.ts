@@ -76,3 +76,5 @@ export const educationFormSchema = (education: EducationData): IFormMakerInput[]
 
   return baseStructure;
 };
+
+export const educationTableHeaders: string[] = ['name', 'description', 'school', 'startDate', 'endDate'];

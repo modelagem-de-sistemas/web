@@ -5,6 +5,7 @@ import DashboardPage from '@/components/Templates/DashboardPage';
 import DashboardHeader from '@/components/Organisms/Containers/DashboardHeader';
 import { getEducations } from '@/lib/education';
 import TableMaker from '@/components/Organisms/Tables/TableMaker';
+import { educationTableHeaders } from '@/utils/constants/components/Admin/Forms/Education';
 
 interface Props {
   educations: EducationData[];
@@ -16,7 +17,7 @@ const DashboardEducation: NextPage<Props> = ({ educations }) => {
   return (
     <DashboardPage>
       <DashboardHeader title="Educations" description="Here you can manage your educations." handleModal={setModal} />
-      <TableMaker content={educations} handleModal={setModal} />
+      <TableMaker content={educations} handleModal={setModal} headers={educationTableHeaders} />
     </DashboardPage>
   );
 };

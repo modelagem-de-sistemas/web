@@ -68,3 +68,5 @@ export const contactFormSchema = (contact: ContactData): IFormMakerInput[][] => 
     }
   ]
 ];
+
+export const contactTableHeaders: string[] = ['Email', 'Phone', 'Description', 'Linkedin', 'Github', 'Instagram'];
