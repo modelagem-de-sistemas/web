@@ -1,9 +1,9 @@
 import { homepageValidation } from '@/utils/validations/homepage';
-import { PrismaClient } from '@prisma/client';
+import { Homepage, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getHomepage = async (): Promise<Homepage> => {
+const getHomepage = async (): Promise<Homepage | null> => {
   const homepage = await prisma.homepage.findFirst();
 
   return homepage;

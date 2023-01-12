@@ -3,7 +3,7 @@ import { PrismaClient, Job, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const getJob = async (id: number): Promise<Job> => {
+const getJob = async (id: number): Promise<Job | null> => {
   const job = await prisma.job.findFirst({
     where: {
       id: id
@@ -19,7 +19,7 @@ const getJobs = async (): Promise<Job[]> => {
   return jobs;
 };
 
-const createJob = async (_jobData: JobData, User: user): Promise<any> => {
+const createJob = async (_jobData: JobData, user: User): Promise<any> => {
   try {
     const { name, description, startDate, endDate, company, office } = _jobData;
 
@@ -34,12 +34,23 @@ const createJob = async (_jobData: JobData, User: user): Promise<any> => {
 
     await jobValidation(jobData);
 
-    const data = await prisma.user.update({
-      where: { id: user.id },
+    const createPost = await prisma.job.create({
       data: {
-        Jobs: {
-          create: [{ ...jobData }]
+        title: 'How to make croissants',
+        author: {
+          connectOrCreate: {
+            where: {
+              email: 'viola@prisma.io'
+            },
+            create: {
+              email: 'viola@prisma.io',
+              name: 'Viola'
+            }
+          }
         }
+      },
+      include: {
+        author: true
       }
     });
 
