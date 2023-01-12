@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Avatar } from '@mui/material';
 import { FiAlignJustify } from 'react-icons/fi';
 
 export const Container = styled.header`
@@ -36,18 +35,6 @@ export const Logo = styled.a`
 
   @media screen and (min-width: 768px) {
     display: block;
-  }
-`;
-
-export const AvatarContainer = styled(Avatar)`
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-
-  @media screen and (min-width: 768px) {
-    width: 40px;
-    height: 40px;
-    order: 1;
   }
 `;
 

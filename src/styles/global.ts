@@ -1,3 +1,5 @@
+//  @ts-nocheck
+
 import { memo } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
@@ -12,7 +14,9 @@ export default memo(createGlobalStyle`
     z-index: 1;
   }
 
-  html, body, #root {
+  html,
+  body,
+  #root {
     height: 100vh;
     width: 100%;
     position: relative;
@@ -25,7 +29,10 @@ export default memo(createGlobalStyle`
     text-decoration: none;
   }
 
-  button, a, div, i{
+  button,
+  a,
+  div,
+  i {
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -34,7 +41,7 @@ export default memo(createGlobalStyle`
     font-display: swap;
 
     --color-theme: 1;
-    --color-background: #FBFBFE;
+    --color-background: #fbfbfe;
     --first-color: hsl(var(--color-theme), 69%, 61%);
     --first-color-dark: hsl(var(--color-theme), 100%, 15.1%);
     --first-color-second: hsl(var(--color-theme), 69%, 61%);
@@ -47,7 +54,7 @@ export default memo(createGlobalStyle`
     --text-color-light: hsl(var(--color-theme), 8%, 65%);
     --input-color: hsl(var(--color-theme), 70%, 96%);
     --body-color: hsl(var(--color-theme), 60%, 99%);
-    --container-color: #FFF;
+    --container-color: #fff;
     --scroll-bar-color: hsl(var(--color-theme), 12%, 90%);
     --scroll-thumb-color: hsl(var(--color-theme), 12%, 80%);
 
@@ -56,32 +63,32 @@ export default memo(createGlobalStyle`
     --body-font: 'Poppins', sans-serif;
     --z-fixed: 100;
 
---normal-font-size: .938rem;
---small-font-size: .75rem;
---smaller-font-size: .75rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.75rem;
+    --smaller-font-size: 0.75rem;
 
-@media screen and (min-width: 1024px){
-    --normal-font-size: 1rem;
-    --small-font-size: .875rem;
-    --smaller-font-size: .813rem;
-}
+    @media screen and (min-width: 1024px) {
+      --normal-font-size: 1rem;
+      --small-font-size: 0.875rem;
+      --smaller-font-size: 0.813rem;
+    }
 
-/*========== Font weight ==========*/
---font-medium: 500;
---font-semi-bold: 600;
+    /*========== Font weight ==========*/
+    --font-medium: 500;
+    --font-semi-bold: 600;
 
     --color-text: #222;
 
-    --header-height: 3.5rem;    
+    --header-height: 3.5rem;
     --z-fixed: 100;
 
     --border-radius: 4px;
     --medium-border-radius: 10px;
     --big-border-radius: 20px;
-    --transition: .2s ease-in-out;
-    --fast-transition: .1s ease-in-out;
+    --transition: 0.2s ease-in-out;
+    --fast-transition: 0.1s ease-in-out;
 
-    --fonts: Poppins , 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    --fonts: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 
     --font-big-size: 3.2rem;
     --font-medium-size: 48px;
@@ -93,13 +100,13 @@ export default memo(createGlobalStyle`
     --font-big-text-size: 1.2rem;
     --font-text-size: 0.9rem;
 
-    @media screen and (min-width: 1600px)  {
+    @media screen and (min-width: 1600px) {
       --font-big-size: 70px;
       --font-big-text-size: 24px;
       --font-big-subtitle-size: 36px;
     }
 
-    @media screen and (min-width: 600px) and (max-width: 1400px){
+    @media screen and (min-width: 600px) and (max-width: 1400px) {
       --font-big-size: 2.5rem;
       --font-big-text-size: 1rem;
       --font-big-subtitle-size: 1.5rem;
