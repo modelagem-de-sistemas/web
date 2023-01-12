@@ -34,6 +34,13 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+          <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" />
+
+          <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+
+          <link rel="stylesheet" href="assets/css/styles.css" />
         </Head>
         <body>
           <Main />
