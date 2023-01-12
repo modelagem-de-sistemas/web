@@ -7,7 +7,6 @@ export const Container = styled.div<{ active: boolean }>`
   min-height: 100vh;
   max-height: 100vh;
   margin: 0;
-  z-index: 10;
   top: 0;
   left: 0;
   transition: var(--transition);

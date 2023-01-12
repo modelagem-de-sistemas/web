@@ -8,9 +8,10 @@ interface Props {
   content: any[];
   handleModal: (modal: string) => void;
   headers: string[];
+  setId: (id: number) => void;
 }
 
-const TableMaker: React.FC<Props> = ({ content, handleModal, headers }) => {
+const TableMaker: React.FC<Props> = ({ content, handleModal, headers, setId }) => {
   const formatData = (data: any) => {
     if (isDate(data)) {
       return toDDMMYYYY(new Date(data));
@@ -33,7 +34,7 @@ const TableMaker: React.FC<Props> = ({ content, handleModal, headers }) => {
         </thead>
         <tbody>
           {content.length > 0 ? (
-            content.map((object: any) => (
+            content.map((object: any, objIndex: number) => (
               <tr>
 
                 {Object.keys(object).map((_item: any, index: number) => {
@@ -45,7 +46,7 @@ const TableMaker: React.FC<Props> = ({ content, handleModal, headers }) => {
                 }
                 )}
 
-                <td data-label="Update" onClick={() => handleModal('update')}>
+                <td data-label="Update" onClick={() => { handleModal('update'); setId(objIndex)}}>
                   <TableButton>Update</TableButton>
                 </td>
                 <td data-label="Delete" onClick={() => handleModal('delete')}>

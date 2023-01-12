@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   > label {
-    font-family: "Assistant" !important;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -22,7 +21,6 @@ export const Container = styled.div`
   }
 
   > span {
-    font-family: "Assistant" !important;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;

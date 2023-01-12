@@ -5,6 +5,7 @@ export const Container = styled.div`
   max-width: 600px;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   padding: 1rem;
+  backround-color: red;
 `;
 
 export const Content = styled.div`
@@ -23,6 +24,7 @@ export const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 
   > header {
     position: relative;
