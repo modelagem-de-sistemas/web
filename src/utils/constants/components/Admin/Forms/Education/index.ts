@@ -56,6 +56,7 @@ export const educationFormSchema = (education: EducationData): IFormMakerInput[]
       }
     ]
   ];
+  console.log(baseStructure)
 
   if (education.id) {
     return [
@@ -73,7 +74,6 @@ export const educationFormSchema = (education: EducationData): IFormMakerInput[]
       ...baseStructure
     ];
   }
-
   return baseStructure;
 };
 

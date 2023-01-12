@@ -15,8 +15,9 @@ const ModalTemplate: React.FC<Props> = ({ children, open, handleClose, title }) 
   if (!open) return null;
 
   return (
-    <>
       <Container>
+        <Backdrop active={open} handler={handleClose} />
+
         <Content>
           <header>
             <h3>{title}</h3>
@@ -27,8 +28,6 @@ const ModalTemplate: React.FC<Props> = ({ children, open, handleClose, title }) 
           <main>{children}</main>
         </Content>
       </Container>
-      <Backdrop active={open} handler={handleClose} />
-    </>
   );
 };
 

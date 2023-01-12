@@ -90,4 +90,4 @@ export const jobFormSchema = (job: JobData): IFormMakerInput[][] => {
   return baseStructure;
 };
 
-export const jobTableHeaders: string[] = ['Name', 'Description', 'Company', 'Office', 'Start Date', 'End Date'];
+export const jobTableHeaders: string[] = ['name', 'description', 'company', 'office', 'startDate', 'endDate'];

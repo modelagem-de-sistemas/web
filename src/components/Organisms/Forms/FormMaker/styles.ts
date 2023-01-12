@@ -2,13 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.form`
   width: 100%;
-
+  
   > header {
     width: 100%;
     margin-bottom: 1rem;
 
     > h2 {
-      font-family: "Assistant" !important;
       font-style: normal;
       font-weight: 700;
       font-size: 22px;
