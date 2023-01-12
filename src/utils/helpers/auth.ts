@@ -1,27 +1,33 @@
 import { User } from '@prisma/client';
 
-const hashPassword = (password: string) => {
+const hashPassword = (password: string): string => {
   const hash = password;
 
   return hash;
 };
 
-const comparePassword = (password: string, hash: string) => {
+const comparePassword = (password: string, hash: string): boolean => {
   const isMatch = hash === password;
 
   return isMatch;
 };
 
-const createToken = (user: User) => {
+const createToken = (user: User): string => {
   const token = JSON.stringify(user);
 
   return token;
 };
 
-const verifyToken = (token: string) => {
-  const decoded = JSON.parse(token) as UserData;
+const verifyToken = (token: string): User => {
+  const decoded = JSON.parse(token) as User;
 
   return decoded;
 };
 
-export { hashPassword, comparePassword, createToken, verifyToken };
+const cleanToken = (token: string): string => {
+  const cleanToken = token.replace('Bearer ', '');
+
+  return cleanToken;
+};
+
+export { hashPassword, comparePassword, createToken, verifyToken, cleanToken };

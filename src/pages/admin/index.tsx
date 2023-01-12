@@ -2,15 +2,15 @@ import type { NextPage } from 'next';
 import React from 'react';
 
 import DashboardPage from '@/components/Templates/DashboardPage';
+import DashboardIntro from '@/components/Organisms/Containers/DashboardIntro';
 
 const DashboardHome: NextPage = () => {
   return (
     <DashboardPage>
-      <h1>Dashboard</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa cum modi praesentium quasi at delectus ullam repellat, doloribus
-        laboriosam incidunt magni suscipit molestias consequuntur distinctio voluptatibus ea ducimus explicabo porro.
-      </p>
+      <DashboardIntro
+        title="Welcome to your dashboard!"
+        description="Here you can manage your profile, your educations, your experiences, and your skills."
+      />
     </DashboardPage>
   );
 };

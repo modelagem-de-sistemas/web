@@ -1,4 +1,5 @@
 import { getEducation, removeEducation, updateEducation } from '@/lib/education';
+import { middleware } from '@/utils/middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const get = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
@@ -31,21 +32,27 @@ const remove = async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<any> {
-  switch (req.method) {
-    case 'GET':
-      await get(req, res);
-      return;
+  try {
+    middleware(req);
 
-    case 'PUT':
-      await update(req, res);
-      return;
+    switch (req.method) {
+      case 'GET':
+        await get(req, res);
+        return;
 
-    case 'DELETE':
-      await remove(req, res);
-      return;
+      case 'PUT':
+        await update(req, res);
+        return;
 
-    default:
-      res.status(405).json({ message: 'Method not allowed' });
-      return;
+      case 'DELETE':
+        await remove(req, res);
+        return;
+
+      default:
+        res.status(405).json({ message: 'Method not allowed' });
+        return;
+    }
+  } catch (e) {
+    res.status(400).json({ message: e });
   }
 }

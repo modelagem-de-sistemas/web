@@ -3,7 +3,7 @@ import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-const login = async (email: string, password: string): Promise<any> => {
+const auth = async (email: string, password: string): Promise<any> => {
   const user: User | null = await prisma.user.findUnique({
     where: {
       email
@@ -25,4 +25,4 @@ const login = async (email: string, password: string): Promise<any> => {
   return { user, token };
 };
 
-export { login };
+export { auth };

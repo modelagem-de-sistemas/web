@@ -1,6 +1,8 @@
 import AdminNavbar from '@/components/Organisms/Navbars/AdminNavbar';
 import AdminSidebar from '@/components/Organisms/Sidebars/AdminSidebar';
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Container } from './styles';
 
@@ -19,6 +21,7 @@ const DashboardPage: React.FC<Props> = (props) => {
     <Container>
       <AdminNavbar handleSidebar={toggleSidebar} />
       <AdminSidebar handleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
+      <ToastContainer />
       <main>{props.children}</main>
     </Container>
   );
