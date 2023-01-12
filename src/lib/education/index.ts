@@ -55,7 +55,7 @@ const createEducation = async (_educationData: EducationData, user: User): Promi
 
     return data;
   } catch (e) {
-    console.log(e);
+    console.error(e);
     throw e;
   }
 };
